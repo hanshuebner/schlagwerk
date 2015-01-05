@@ -13,7 +13,7 @@
 
 MCU          = at90usb646
 ARCH         = AVR8
-BOARD        = TEENSY2
+BOARD        = TEENSY
 F_CPU        = 16000000
 F_USB        = $(F_CPU)
 OPTIMIZATION = s

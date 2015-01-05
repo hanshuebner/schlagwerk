@@ -40,6 +40,12 @@ void SetupHardware(void)
 
   USB_Init();
 
+  // Pins als Outputs definition
+  DDRB = 0xff;
+  DDRC = 0xff;
+  DDRD = 0xff;
+  DDRF = 0xff;
+
   // Timer 0 konfigurieren
   TCCR0A = (1<<WGM01); // CTC Modus
   TCCR0B |= (1<<CS01); // Prescaler 8
@@ -69,7 +75,7 @@ ISR (TIMER0_COMPA_vect)
   PORTC = sample_buffer[sample_pointer][1];
   PORTD = sample_buffer[sample_pointer][2];
   PORTF = sample_buffer[sample_pointer][3];
-  sample_pointer++;
+  sample_pointer = (sample_pointer + 1) % 128;
 }
 
 void
