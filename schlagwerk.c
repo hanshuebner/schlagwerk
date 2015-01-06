@@ -71,11 +71,12 @@ static uint8_t sample_pointer = 0;
 
 ISR (TIMER0_COMPA_vect)
 {
-  PORTB = sample_buffer[sample_pointer][0];
-  PORTC = sample_buffer[sample_pointer][1];
-  PORTD = sample_buffer[sample_pointer][2];
-  PORTF = sample_buffer[sample_pointer][3];
-  sample_pointer = (sample_pointer + 1) % 128;
+  uint8_t* frame = sample_buffer[sample_pointer++];
+  sample_pointer %= 128;
+  PORTB = *frame++;
+  PORTC = *frame++;
+  PORTD = *frame++;
+  PORTF = *frame++;
 }
 
 void
